@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты теста</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #00ffc3;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #00ffc3;
+            margin-top: 20px;
+        }
+
+        .summary {
+            font-size: 1.3em;
+            margin-top: 10px;
+            margin-bottom: 40px;
+        }
+
+        .block {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,255,195,0.2);
+            text-align: left;
+        }
+
+        .block ul {
+            padding-left: 20px;
+        }
+
+        .block li {
+            margin-bottom: 10px;
+        }
+
+        .back-btn {
+            background-color: #00ffc3;
+            color: #121212;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Результаты теста</h1>
+    <div class="summary">
+        Поздравляем, {{ username }}!<br>
+        Вы ответили правильно на {{ correct }} из {{ total }} вопросов.
+    </div>
+
+    {% if wrong_questions %}
+    <div class="block">
+        <h2>Ошибки</h2>
+        <ul>
+            {% for q in wrong_questions %}
+            <li>{{ q }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="block">
+        <h2>Рекомендации</h2>
+        <p>{{ ai_feedback }}</p>
+    </div>
+
+    <a href="/profile" class="back-btn">Вернуться в профиль</a>
+</body>
+</html>

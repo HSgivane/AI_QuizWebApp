@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            padding: 30px 20px;
+        }
+
+        .question-block {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 10px rgba(0,255,195,0.2);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #00ffc3;
+        }
+
+        .answer-btn {
+            display: block;
+            width: 100%;
+            background-color: #2a2a2a;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            text-align: left;
+            transition: 0.2s;
+        }
+
+        .answer-btn:hover {
+            background-color: #333;
+        }
+
+        .correct {
+            background-color: #28a745 !important;
+        }
+
+        .wrong {
+            background-color: #dc3545 !important;
+        }
+    </style>
+</head>
+<body>
+    <form action="/score" method="post">
+    {% for question in questions %}
+    {% set question_index = loop.index0 %}
+    <div class="question-block">
+        <div class="question-text">
+            {{ loop.index }}. {{ question.question }}
+        </div>
+        {% for key, value in question.options.items() %}
+        <button type="button" class="answer-btn" data-index="{{ question_index }}"
+                onclick="showAnswer(this, '{{ key }}', '{{ question.correct }}')">
+            {{ key }}) {{ value }}
+        </button>
+        {% endfor %}
+        <input type="hidden" name="q{{ question_index }}" id="q{{ question_index }}">
+        <input type="hidden" name="correct_{{ question_index }}" value="{{ question.correct }}">
+    </div>
+    {% endfor %}
+
+    <div style="text-align:center; margin-top: 40px;">
+        <button type="submit"
+                style="background-color:#00ffc3; color:#000; padding:12px 24px;
+                    border:none; border-radius:10px; font-size:1em; cursor:pointer;">
+            Завершить тест
+        </button>
+    </div>
+    </form>
+
+    <script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+</body>
+</html>

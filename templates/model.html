@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор тестов</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            padding: 30px 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+            text-align: center;
+            color: #00ffc3;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 20px 50px;
+        }
+
+        form {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 255, 195, 0.2);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        label {
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 1em;
+            background-color: #2a2a2a;
+            color: #ffffff;
+        }
+
+        input[type="submit"] {
+            background: #00ffc3;
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1em;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: #00cfa3;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>Генератор тестов по теме</h1>
+        <form method="post">
+            <label for="topic">Введите тему:</label>
+            <input type="text" id="topic" name="topic" placeholder="Например: SQL, физика, Python">
+            <input type="submit" value="Сгенерировать">
+        </form>
+        {% if error %}
+        <p style="color: #ff4d4d; margin-top: 15px;">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
